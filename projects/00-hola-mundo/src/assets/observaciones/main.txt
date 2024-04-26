@@ -1,0 +1,21 @@
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import './index.css'
+
+const root = ReactDOM.createRoot(document.getElementById('root')!)
+
+// root.render(
+//   <button>Hola Mundo</button>
+//   <button>Hola Mundo</button>
+// ) No se puede renderizar dos elementos html dentro de un solo elemento, para eso se usa *REACTFRAGMENT* <> </>
+
+// Los componentes deben ser Pacal case, es decir, la primera letra de cada palabra debe ser mayúscula.
+// porque React interpreta los nombres de los componentes que empiezan con minúsculas como etiquetas html.
+const Button = ({ text, icon }: { text: string; icon: string }) => <button>{text} <i className={icon}></i></button>
+
+root.render(
+  <>
+    <Button text="Hola Mundo" icon="bi bi-2-circle" />
+    <Button text="Hola Mundo" icon="bi bi-2-circle-fill" />
+  </>
+)
