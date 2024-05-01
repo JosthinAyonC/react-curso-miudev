@@ -1,12 +1,20 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import './App.css'
 import { Counter } from './components/Counter'
+
+// Creamos un contexto para el tema de la aplicación
+export const ThemeContext = React.createContext('');
 
 function App() {
   // Use State es un hook que nos permite tener un estado en un componente funcional
   // count es el estado que vamos a tener
   // setCount es la función que nos permite modificar el estado
   const [count, setCount] = useState(0)
+  const [theme, setTheme] = useState('light')
+
+  function toggleTheme(theme: string) {
+    setTheme(theme)
+  }
 
   // UseEffect es un hook que nos permite ejecutar código al renderizar el componente
   // El primer parámetro es la función que se va a ejecutar
@@ -23,10 +31,18 @@ function App() {
   }, [count]);
 
   return (
-    <Counter
-      count={count}
-      setCount={setCount}
-    ></Counter>
+    // ThemeContext.Provider es un componente que nos permite pasar un valor a todos los componentes hijos
+    // a traves del uso de useContext
+    <ThemeContext.Provider value={theme}>
+      <div className="themes">
+        <button onClick={() => toggleTheme("dark")}><i className="bi bi-moon"></i></button>
+        <button onClick={() => toggleTheme("light")}><i className="bi bi-sun"></i></button>
+      </div>
+      <Counter
+        count={count}
+        setCount={setCount}
+      ></Counter>
+    </ThemeContext.Provider>
   )
 }
 
